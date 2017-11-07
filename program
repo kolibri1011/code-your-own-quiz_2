@@ -1,0 +1,73 @@
+# A list of the blanks to use for the input 
+blanks  = ["__1__", "__2__", "__3__", "__4__"]
+
+# question and answer lists.
+easy_question = '''This day __1__ is the name of the first day of the week.
+The worst day __2__ is the second day of the week.
+The best day __3__ is the seventh day of the week.
+This day, __4__ is the sixth day of the week.'''
+
+medium_question = '''The first month of the year is __1__.
+The seventh month of the year is __2__. Fall starts in this month __3__.,
+This month has the spring equinox __4__.'''
+
+hard_question = '''There are __1__ weeks in a year.
+The answer to the universe and everything is __2__.,
+The legal voting age is __3__. , There are __4__ days in a leap year.'''
+
+easy_answers = ["Sunday", "Monday", "Saturday", "Friday"]
+medium_answers = ["January", "July", "September", "March"]
+hard_answers = ["52", "42", "18", "366"]
+
+
+questions = [easy_question, medium_question, hard_question]
+answers = [easy_answers, medium_answers, hard_answers]
+
+def level_of_diff():
+   
+    level = raw_input("enter diff level, easy medium or hard:")
+ 
+    if level == 'easy':
+        print "You chose easy. You have 3 chances.\n" + easy_question
+        return quiz_answer(easy_question, easy_answers)
+    elif level == 'medium':
+        print "\nYou chose medium. You have 3 chances. \n" + medium_question
+        return quiz_answer(medium_question, medium_answers)
+    elif level == 'hard':
+        print "\nYou chose hard. You have 3 chances to answer correctly.\n" + hard_question
+        return quiz_answer(hard_question, hard_answers)
+    else:
+        print "\nTry again."
+        return choose_a_level()
+    
+    
+def quiz_answer(questions, answer):
+#loops thru answers
+    blank = 0
+    score = 0
+    while blank <len(answer):
+        user_input = raw_input("\nwhat is your answer for blank __"+ str(blank+1) + "__?")
+        if user_input == answer[blank]:	
+            print "correct"
+            blank += 1 
+            question = questions.replace("__" + str(blank)+"__", user_input)
+            print(question)
+
+        else:
+            print "try again" + "\n" + questions
+            score +=1
+            if score > 2:
+                print "\n You are out of chances!"
+                break
+                level_of_diff
+    print questions(quiz_answer)
+    print "You win!"
+
+
+
+
+
+if __name__ == "__main__":
+    level_of_diff()
+
+
